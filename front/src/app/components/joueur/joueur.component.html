@@ -1,0 +1,17 @@
+<h1>Ajouter joueur</h1>
+
+<form #e="ngForm" class="container-fluid">
+
+    <input type="text" class="form-control" placeholder="Speudo">
+
+    <input #nb type="text" class="form-control" (keyup)="AjouterInput(nb.value)">
+
+    <div id="input">
+
+    </div>
+
+    
+</form>
+
+
+
