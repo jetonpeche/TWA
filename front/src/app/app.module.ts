@@ -21,6 +21,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
+import { UniteService } from './services/unite.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatSelectModule
   ],
-  providers: [],
+  providers: [UniteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

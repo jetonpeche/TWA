@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UniteService } from 'src/app/services/unite.service';
+
 
 @Component({
   selector: 'app-unite',
@@ -7,9 +9,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UniteComponent implements OnInit {
 
-  constructor() { }
+  listeUnite: any[];
+  listeCommandant: any[];
 
-  ngOnInit(): void {
+  constructor(private uniteService: UniteService) { }
+
+  ngOnInit(): void 
+  {
+    this.uniteService.ListerUnite().subscribe(
+      (liste: string[]) =>
+      {
+        this.listeUnite = liste;
+      },
+      () =>
+      {
+        console.log("erreur");
+        
+      });
+
+      this.uniteService.ListeCommandant().subscribe(
+        (liste: string[]) =>
+        {
+          this.listeCommandant = liste;
+        },
+        () =>
+        {
+          console.log("erreur");
+          
+        });
+  }
+
+  ListeUnite(cmdt)
+  {
+    this.listeUnite = this.listeCommandant.filter(a => a.idNation == cmdt.idNation);
   }
 
 }

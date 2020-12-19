@@ -1,1 +1,29 @@
-<p>unite works!</p>
+<h2>Ajout des unitées</h2>
+
+<form class="container" #e="ngForm">
+
+    <div class="row">
+        <div class="col">
+            <!-- commandant -->
+            <mat-form-field>
+                <mat-label>Commandant</mat-label>
+                <mat-select (change)="ListeUnite($event.target.value)">
+                    <mat-option *ngFor="let ligne of listeCommandant" [value]="ligne">{{ ligne.libelCommandant }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col">
+            <!-- unite de la nation -->
+            <mat-form-field>
+                <mat-label>Unités de la nation</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let ligne of listeUnite" [value]="ligne.idUnite">{{ ligne.libelUnite }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    
+
+    
+</form>
