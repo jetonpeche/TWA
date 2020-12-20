@@ -39,23 +39,23 @@ class DialogueBD
         return $liste;
     }
 
-    public function AjouterUniteJoueur($idUnite, $idCmdt, $idJoueur)
+    public function AjouterUniteJoueur($idUnite, $idCmdt, $nivUnite, $idJoueur)
     {
-        if(!$this->AdejaUnite($idUnite, $idCmdt, $idJoueur))
+        if(!$this->AdejaUnite($idUnite, $idCmdt, $nivUnite, $idJoueur))
         {
             $conn = Connexion::getConnexion();
-            $sql = "INSERT INTO joueur_unite (idUnite, idCommandant, id) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO joueur_unite (idUnite, idCommandant, niveauUnite, id) VALUES (?, ?, ?, ?)";
             $sth = $conn->prepare($sql);
-            $sth->execute(array($idUnite, $idCmdt, $idJoueur));
+            $sth->execute(array($idUnite, $idCmdt, $nivUnite, $idJoueur));
         }
     }
 
-    private function AdejaUnite($idUnite, $idCmdt, $idJoueur)
+    private function AdejaUnite($idUnite, $idCmdt, $nivUnite, $idJoueur)
     {
         $conn = Connexion::getConnexion();
-        $sql = "SELECT COUNT(*) AS nombre FROM joueur_unite WHERE idUnite = ? AND idCommandant = ? AND id = ?";
+        $sql = "SELECT COUNT(*) AS nombre FROM joueur_unite WHERE idUnite = ? AND idCommandant = ? AND niveauUnite = ? AND id = ?";
         $sth = $conn->prepare($sql);
-        $sth->execute(array($idUnite, $idCmdt, $idJoueur));
+        $sth->execute(array($idUnite, $idCmdt, $nivUnite, $idJoueur));
 
         $ok = $sth->fetchObject();
         
