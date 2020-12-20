@@ -61,6 +61,8 @@ create table joueur_unite
     constraint FK_joueurUnite_cmdt foreign key (idCommandant) references commandant(idCommandant)
 );
 
+-- joueur --
+INSERT INTO joueur (id, speudo) VALUES (1, 'Espada'), (2, 'Goons'), (3, 'Gelbrelor'), (4, 'Pandepop'), (5, 'Jalief'), (6, 'LaythSelim'), (7, 'SkyHunter'), (8, 'Bibi'), (9, 'Rhagor'), (10, 'Tayra_Zineum'), (11, 'Blinton'), (12, 'Tartif'), (13, 'Mazamara'), (14, 'Phenom'), (15, 'Vertigo'), (16, 'Aure'), (17, 'Shaft'), (18, 'RestryZz');
 
 -- nation --
 INSERT INTO nation (idNation, libelNation) values (1, 'Rôme'), (2, 'Barbare'), (3, 'Grec'), (4, 'Carthage'), (5, 'Chine');

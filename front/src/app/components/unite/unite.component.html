@@ -1,29 +1,64 @@
-<h2>Ajout des unitées</h2>
+<div class="container">
+    <p>Tuto</p>
+    <ul>
+        <li>Selectionner Joueur</li>
+        <li>Selectionner commandant</li>
+        <li>Selectionner le niveau des unités</li>
+        <li>Selectionner les unités</li>
+    </ul>
 
-<form class="container" #e="ngForm">
+    <p><strong style="color: red">Attention: ne changer pas de niveau pour une unité déjà sélectionnée <br>
+    Exemple: Bretteur lourd T5 et Bretteur lourd T6</strong></p>
+
+    <!-- ajout -->
+    <h2>Ajout des unitées</h2>
 
     <div class="row">
+        <!-- joueur -->
         <div class="col">
-            <!-- commandant -->
+            <mat-form-field>
+                <mat-label>Joueur</mat-label>
+                <mat-select name="joueur" (selectionChange)="JoueurChoisi($event.value)">
+                    <mat-option *ngFor="let ligne of listeJoueur" [value]="ligne.id">{{ ligne.speudo }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- commandant -->
+        <div class="col">
             <mat-form-field>
                 <mat-label>Commandant</mat-label>
-                <mat-select (change)="ListeUnite($event.target.value)">
-                    <mat-option *ngFor="let ligne of listeCommandant" [value]="ligne">{{ ligne.libelCommandant }}</mat-option>
+                <mat-select name="cmdt" (selectionChange)="ListerUnite($event.value)">
+                    <mat-option *ngFor="let ligne of listeCommandant" [value]="ligne.idCommandant">{{ ligne.libelCommandant }}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
 
+        <!-- niveau des unites selectionné -->
         <div class="col">
-            <!-- unite de la nation -->
             <mat-form-field>
-                <mat-label>Unités de la nation</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let ligne of listeUnite" [value]="ligne.idUnite">{{ ligne.libelUnite }}</mat-option>
+                <mat-label>Niveau unités</mat-label>
+                <mat-select name="niveauUnite" (selectionChange)="NiveauUniteChoisi($event.value)">
+                    <mat-option value="5">5</mat-option>
+                    <mat-option value="6">6</mat-option>
+                    <mat-option value="7">7</mat-option>
+                    <mat-option value="8">8</mat-option>
+                    <mat-option value="9">9</mat-option>
+                    <mat-option value="10">10</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
-    </div>
-    
+    </div>  
 
-    
-</form>
+    <!-- affichage unites de la nation du commandant choisi -->
+    <section class="row">
+        <div class="col-md-4 col-xs-12" *ngFor="let ligne of listeUniteCommandant">
+            <mat-checkbox class="checkBoxUnite" (change)="ClickCheckBox(ligne.idUnite, $event.checked)">{{ ligne.libelUnite }}</mat-checkbox>
+        </div>
+    </section>
+
+    <button mat-raised-button (click)="AjouterUniteJoueur()" color="primary">Valider</button> 
+</div>
+
+
+

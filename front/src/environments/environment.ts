@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  URL_PHP: 'http://localhost/TWA/TWA/back/'
+  URL_PHP: 'http://localhost/TWA/back/'
 };
 
 /*

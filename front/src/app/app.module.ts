@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { JoueurComponent } from './components/joueur/joueur.component';
 import { UniteComponent } from './components/unite/unite.component';
 
+
 // angular material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -20,6 +21,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
+import { MatRadioModule } from '@angular/material/radio';
 
 import { UniteService } from './services/unite.service';
 
@@ -43,7 +46,9 @@ import { UniteService } from './services/unite.service';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule
   ],
   providers: [UniteService],
   bootstrap: [AppComponent]
