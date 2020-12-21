@@ -1,17 +1,19 @@
-<h1>Ajouter joueur</h1>
+<form #e="ngForm" (ngSubmit)="AjouterJoueur(e)" class="container-fluid">
+    <br>
+    <h2>Ajouter joueur</h2>
 
-<form #e="ngForm" class="container-fluid">
+    <input type="hidden" name="nbJoueur" [ngModel]="nbJoueur" required>
 
-    <input type="text" class="form-control" placeholder="Speudo">
+    <input #nb type="text" placeholder="Nombre de joueur(s) à ajouter" class="form-control" (keyup)="AjouterInput(nb.value)">
 
-    <input #nb type="text" class="form-control" (keyup)="AjouterInput(nb.value)">
+    <br>
 
-    <div id="input">
-
+    <!-- liste des inputs pour ajouter des joueurs -->
+    <div class="row">
+        <div class="col-lg-4 col-xs-12" *ngFor="let input of listeInput">
+            <input type="text" [name]="input.name" class="form-control" placeholder="speudo du joueur" ngModel required>
+        </div>
     </div>
 
-    
+    <button mat-raised-button color="primary" type="submit" [disabled]="e.invalid">Ajouter</button>
 </form>
-
-
-

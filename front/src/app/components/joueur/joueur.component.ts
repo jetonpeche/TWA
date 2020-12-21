@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { JoueurService } from 'src/app/services/joueur.service';
 
 @Component({
   selector: 'app-joueur',
@@ -7,23 +9,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JoueurComponent implements OnInit {
 
-  constructor() { }
+  listeInput: any[] = [];
+  nbJoueur: number = 0;
+
+  constructor(private joueurService: JoueurService) { }
 
   ngOnInit(): void {
   }
 
-  AjouterInput(nb: number)
+  AjouterInput(nb: number): void
   {
-    let inputs;
+    this.listeInput = [];
 
-    for (let index = 0; index < nb; index++) 
+    for (let index = 1; index <= nb; index++) 
     {
-      inputs += `<input type="text" class="form-control" placeholder="unité ${index + 1}">`
-      
+      this.listeInput.push({ name: `joueur${index}` });
     }
 
-    return document.getElementById('input').innerHTML = inputs;
-    
+    this.nbJoueur = nb;
   }
 
+  AjouterJoueur(form: NgForm): void
+  {
+    console.log(form.value);
+    
+    this.joueurService.AjouterJoueur(form.value).subscribe(
+      () =>
+      {
+        console.log("Ajouter");
+      },
+      () =>
+      {
+        console.log("erreur");
+        
+      });   
+  }
 }

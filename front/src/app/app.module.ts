@@ -25,6 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 
 import { UniteService } from './services/unite.service';
+import { JoueurService } from './services/joueur.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { UniteService } from './services/unite.service';
     MatRadioModule,
     MatCheckboxModule
   ],
-  providers: [UniteService],
+  providers: [UniteService, JoueurService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -50,6 +50,32 @@ class DialogueBD
         }
     }
 
+    public function AjouterJoueur($speudo)
+    {
+        if(!$this->JoueurExist($speudo))
+        {
+            $conn = Connexion::getConnexion();
+            $sql = "INSERT INTO joueur (speudo) VALUES (?)";
+            $sth = $conn->prepare($sql);
+            $sth->execute(array($speudo));
+        }
+    }
+
+    private function JoueurExist($speudo)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "SELECT COUNT(*) as nombre FROM joueur WHERE speudo = ?";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($speudo));
+
+        $ok = $sth->fetchObject();
+        
+        if($ok->nombre == 1)
+            return true;
+        else
+            return false;
+    }
+
     private function AdejaUnite($idUnite, $idCmdt, $nivUnite, $idJoueur)
     {
         $conn = Connexion::getConnexion();

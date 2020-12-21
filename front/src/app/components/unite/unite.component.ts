@@ -5,6 +5,7 @@ import { Commandant } from 'src/app/customTypes/Commandant';
 import { Unite } from 'src/app/customTypes/Unite';
 import { Joueur } from 'src/app/customTypes/Joueur';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { JoueurService } from 'src/app/services/joueur.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class UniteComponent implements OnInit {
   private idJoueurChoisi: string;
   private nivUniteChoisi: string;
 
-  constructor(private uniteService: UniteService) { }
+  constructor(private uniteService: UniteService, private joueurService: JoueurService) { }
 
   ngOnInit(): void 
   {
@@ -50,7 +51,7 @@ export class UniteComponent implements OnInit {
           
         });
 
-      this.uniteService.ListeJoueur().subscribe(
+      this.joueurService.ListeJoueur().subscribe(
         (liste: Joueur[]) =>
         {
           this.listeJoueur = liste;
