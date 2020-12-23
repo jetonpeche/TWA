@@ -24,6 +24,7 @@ export class UniteComponent implements OnInit {
   private idCmdtChoisi: number;
   private idJoueurChoisi: string;
   private nivUniteChoisi: string;
+  private unitePreferer: boolean = false;
 
   constructor(private uniteService: UniteService, private joueurService: JoueurService) { }
 
@@ -60,7 +61,7 @@ export class UniteComponent implements OnInit {
   }
 
   ListerUnite(idCmdt: number): void
-  {
+  { 
     // recupere idNation du cmdt
     let cmdtInfo = this.listeCommandant.filter(a => a.idCommandant == idCmdt);
     
@@ -100,7 +101,7 @@ export class UniteComponent implements OnInit {
     // ajoute l'unite au tableau
     if(estCocher)
     {
-      this.listeUniteChoisi.push({ idUnite: id, idCmdt: this.idCmdtChoisi, nivUnite: this.nivUniteChoisi });
+      this.listeUniteChoisi.push({ idUnite: id, idCmdt: this.idCmdtChoisi, nivUnite: this.nivUniteChoisi, unitePreferer: this.unitePreferer });
     }
     // supprime l'unite du tableau
     else
@@ -117,6 +118,22 @@ export class UniteComponent implements OnInit {
 
   NiveauUniteChoisi(niv: string): void
   {
+    // decoche les checkboxs du l'ancien niveau
+    if(this.nivUniteChoisi != null && this.nivUniteChoisi != niv && this.idCmdtChoisi != null)
+    {
+      this.listeUniteCommandant = [];
+      setTimeout(() => { this.ListerUnite(this.idCmdtChoisi) }, 50);
+    }
       this.nivUniteChoisi = niv;
+  }
+
+  IdJoueurNiveauChoisi(): boolean
+  {
+    return this.idJoueurChoisi != null && this.nivUniteChoisi != null;
+  }
+
+  UnitePreferer(checkbox: boolean): void
+  {
+    this.unitePreferer = checkbox;   
   }
 }

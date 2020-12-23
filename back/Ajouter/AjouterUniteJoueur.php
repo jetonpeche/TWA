@@ -15,9 +15,10 @@
         // ajout des unites pour le joueur
         foreach ($liste as $ligne) 
         {
+            $unitePreferer = $ligne['unitePreferer'] == "true" ? 'Oui' : 'Non';
+
             // pas d'ajout si pas unite sur la ligne ou pas de niveau
-            if(isset($ligne['idUnite']) && !empty($ligne['idUnite']) && isset($ligne['nivUnite']) && !empty($ligne['nivUnite']))
-                $diag->AjouterUniteJoueur($ligne['idUnite'], $ligne['idCmdt'], $ligne['nivUnite'], $idJoueur);
+            $diag->AjouterUniteJoueur($ligne['idUnite'], $ligne['idCmdt'], $ligne['nivUnite'], $idJoueur, $unitePreferer);
         }
 
         echo json_encode(true);

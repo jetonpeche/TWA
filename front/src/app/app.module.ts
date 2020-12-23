@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JoueurComponent } from './components/joueur/joueur.component';
 import { UniteComponent } from './components/unite/unite.component';
+import { ListeJoueurUniteComponent } from './components/liste-joueur-unite/liste-joueur-unite.component';
 
 
 // angular material
@@ -24,14 +25,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { MatRadioModule } from '@angular/material/radio';
 
+// services
 import { UniteService } from './services/unite.service';
 import { JoueurService } from './services/joueur.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     JoueurComponent,
-    UniteComponent
+    UniteComponent,
+    ListeJoueurUniteComponent
   ],
   imports: [
     HttpClientModule,

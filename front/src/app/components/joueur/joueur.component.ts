@@ -30,9 +30,7 @@ export class JoueurComponent implements OnInit {
   }
 
   AjouterJoueur(form: NgForm): void
-  {
-    console.log(form.value);
-    
+  { 
     this.joueurService.AjouterJoueur(form.value).subscribe(
       () =>
       {

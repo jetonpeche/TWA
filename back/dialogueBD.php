@@ -39,14 +39,14 @@ class DialogueBD
         return $liste;
     }
 
-    public function AjouterUniteJoueur($idUnite, $idCmdt, $nivUnite, $idJoueur)
+    public function AjouterUniteJoueur($idUnite, $idCmdt, $nivUnite, $idJoueur, $unitePreferer)
     {
         if(!$this->AdejaUnite($idUnite, $idCmdt, $nivUnite, $idJoueur))
         {
             $conn = Connexion::getConnexion();
-            $sql = "INSERT INTO joueur_unite (idUnite, idCommandant, niveauUnite, id) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO joueur_unite (idUnite, idCommandant, niveauUnite, id, unitePreferer) VALUES (?, ?, ?, ?, ?)";
             $sth = $conn->prepare($sql);
-            $sth->execute(array($idUnite, $idCmdt, $nivUnite, $idJoueur));
+            $sth->execute(array($idUnite, $idCmdt, $nivUnite, $idJoueur, $unitePreferer));
         }
     }
 

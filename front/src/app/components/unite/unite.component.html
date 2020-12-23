@@ -1,14 +1,4 @@
 <div class="container">
-    <p>Tuto</p>
-    <ul>
-        <li>Selectionner Joueur</li>
-        <li>Selectionner commandant</li>
-        <li>Selectionner le niveau des unités</li>
-        <li>Selectionner les unités</li>
-    </ul>
-
-    <p><strong style="color: red">Attention: ne changer pas de niveau pour une unité déjà sélectionnée <br>
-    Exemple: Bretteur lourd T5 et Bretteur lourd T6</strong></p>
 
     <!-- ajout -->
     <h2>Ajout des unitées</h2>
@@ -50,10 +40,19 @@
         </div>
     </div>  
 
+    <!-- unite preferer -->
+    <div class="row">
+        <div class="col">
+            <mat-checkbox class="checkBoxUnite" (change)="UnitePreferer($event.checked)">Unité préféré</mat-checkbox>
+        </div>
+    </div>
+
+    <br>
+
     <!-- affichage unites de la nation du commandant choisi -->
     <section class="row">
         <div class="col-md-4 col-xs-12" *ngFor="let ligne of listeUniteCommandant">
-            <mat-checkbox class="checkBoxUnite" (change)="ClickCheckBox(ligne.idUnite, $event.checked)">{{ ligne.libelUnite }}</mat-checkbox>
+            <mat-checkbox [disabled]="!IdJoueurNiveauChoisi()" class="checkBoxUnite" (change)="ClickCheckBox(ligne.idUnite, $event.checked)">{{ ligne.libelUnite }}</mat-checkbox>
         </div>
     </section>
 
