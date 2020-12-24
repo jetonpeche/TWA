@@ -39,6 +39,33 @@ class DialogueBD
         return $liste;
     }
 
+    public function ListerNation()
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "SELECT * FROM nation ORDER BY libelNation";
+        $sth = $conn->prepare($sql);
+        $sth->execute();
+
+        $liste = $sth->fetchAll();
+        return $liste; 
+    }
+
+    public function ListerJoueurUnite()
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "SELECT JU.*, U.libelUnite, C.libelCommandant, N.idNation, N.libelNation
+                FROM joueur_unite JU 
+                JOIN unite U ON JU.idUnite = U.idUnite
+                JOIN commandant C ON JU.idCommandant = C.idCommandant
+                JOIN nation N ON N.idNation = C.idNation
+                ORDER BY N.libelNation";
+        $sth = $conn->prepare($sql);
+        $sth->execute();
+
+        $liste = $sth->fetchAll();
+        return $liste;
+    }
+
     public function AjouterUniteJoueur($idUnite, $idCmdt, $nivUnite, $idJoueur, $unitePreferer)
     {
         if(!$this->AdejaUnite($idUnite, $idCmdt, $nivUnite, $idJoueur))

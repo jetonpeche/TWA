@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { JoueurComponent } from './components/joueur/joueur.component';
 import { UniteComponent } from './components/unite/unite.component';
 import { ListeJoueurUniteComponent } from './components/liste-joueur-unite/liste-joueur-unite.component';
+import { ModalListeJoueurUniteComponent } from './components/modal-liste-joueur-unite/modal-liste-joueur-unite.component';
 
 
 // angular material
@@ -24,18 +25,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { MatRadioModule } from '@angular/material/radio';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
 
 // services
 import { UniteService } from './services/unite.service';
 import { JoueurService } from './services/joueur.service';
-
+import { NationService } from './services/nation.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     JoueurComponent,
     UniteComponent,
-    ListeJoueurUniteComponent
+    ListeJoueurUniteComponent,
+    ModalListeJoueurUniteComponent
   ],
   imports: [
     HttpClientModule,
@@ -53,9 +58,14 @@ import { JoueurService } from './services/joueur.service';
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule,
+    MatDialogModule,
+    MatSortModule
   ],
-  providers: [UniteService, JoueurService],
+  entryComponents: [ModalListeJoueurUniteComponent],
+  
+  providers: [UniteService, JoueurService, NationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

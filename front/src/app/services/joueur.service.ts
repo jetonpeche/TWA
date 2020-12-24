@@ -21,6 +21,4 @@ export class JoueurService
   {
     return this.http.post<any>(`${environment.URL_PHP}Ajouter/AjouterJoueur.php`, info);
   }
-
-  
 }
