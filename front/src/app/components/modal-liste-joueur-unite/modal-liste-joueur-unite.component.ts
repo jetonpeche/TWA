@@ -6,6 +6,7 @@ import {MatSort} from '@angular/material/sort';
 import { NationService } from 'src/app/services/nation.service';
 import { Nation } from 'src/app/customTypes/Nation';
 import { Unite } from 'src/app/customTypes/Unite';
+import { UniteService } from 'src/app/services/unite.service';
 
 @Component({
   selector: 'app-modal-liste-joueur-unite',
@@ -20,12 +21,14 @@ export class ModalListeJoueurUniteComponent implements OnInit, AfterViewInit  {
   listeNation: Nation[] = [];
   listeUnite: Unite[] = [];
 
+  listeUniteSupp: any[] = [];
+
   private idNationChoisi: number;
 
   // recupere les données envoyer par le btn qui appel le modal
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private nationService: NationService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private uniteService: UniteService) { }
 
-  displayedColumns: string[] = ['niveauUnite', 'libelUnite', 'libelCommandant', 'libelNation'];
+  displayedColumns: string[] = ['niveauUnite', 'libelUnite', 'libelCommandant', 'libelNation', 'supprimer'];
 
   ngOnInit(): void 
   {
@@ -47,9 +50,7 @@ export class ModalListeJoueurUniteComponent implements OnInit, AfterViewInit  {
     for(const element of this.data.liste)
     {
       const idUnite = listeIdUnite.filter(a => a == element.idUnite);
-      console.log(idUnite);
       
-
       if(idUnite.length == 0)
       {
         this.listeUnite.push({ idUnite: element.idUnite, libelUnite: element.libelUnite, idNation: null });
@@ -67,6 +68,29 @@ export class ModalListeJoueurUniteComponent implements OnInit, AfterViewInit  {
   {
     const filterValue = (event.target as HTMLInputElement).value;
     this.listeUniteJoueur.filter = filterValue.trim().toLowerCase();
+  }
+
+  SuppUniteJoueur(infosUnite: JoueurUnite)
+  {
+    if(confirm("Confirmation de la suppression de l'unité"))
+    {
+      this.uniteService.SuppUniteJoueur(infosUnite).subscribe(
+        () =>
+        {
+          // recupere la ligne supp
+          const uniteSupp: JoueurUnite[] = this.data.liste.filter( a => a.idUnite == infosUnite.idUnite && a.idNation == infosUnite.idNation && a.idCommandant == infosUnite.idCommandant);
+          
+
+          this.listeUniteSupp.push({ id: uniteSupp[0].id, idUnite: uniteSupp[0].idUnite, idNation: uniteSupp[0].idNation, idCommandant: uniteSupp[0].idCommandant });
+
+          // supp l'unite de la liste
+          const index = this.data.liste.findIndex(a => a.idUnite == infosUnite.idUnite && a.idNation == infosUnite.idNation && a.idCommandant == infosUnite.idCommandant);
+          this.data.liste.splice(index, 1);
+
+          this.listeUniteJoueur.data = this.data.liste;
+        }
+      ) 
+    }
   }
 
   FiltreNation(idNation: number): void

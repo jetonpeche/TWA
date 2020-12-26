@@ -10,6 +10,7 @@ import { JoueurComponent } from './components/joueur/joueur.component';
 import { UniteComponent } from './components/unite/unite.component';
 import { ListeJoueurUniteComponent } from './components/liste-joueur-unite/liste-joueur-unite.component';
 import { ModalListeJoueurUniteComponent } from './components/modal-liste-joueur-unite/modal-liste-joueur-unite.component';
+import { AjoutUniteComponent } from './components/ajout-unite/ajout-unite.component';
 
 
 // angular material
@@ -40,7 +41,8 @@ import { NationService } from './services/nation.service';
     JoueurComponent,
     UniteComponent,
     ListeJoueurUniteComponent,
-    ModalListeJoueurUniteComponent
+    ModalListeJoueurUniteComponent,
+    AjoutUniteComponent
   ],
   imports: [
     HttpClientModule,

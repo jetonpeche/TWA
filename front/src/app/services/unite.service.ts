@@ -15,12 +15,12 @@ export class UniteService {
 
   ListerUnite(): Observable<Unite[]>
   {
-    return this.http.get<Unite[]>(`${environment.URL_PHP}listing/ListeUnite.php`);
+    return this.http.get<Unite[]>(`${environment.URL_PHP}listing/listeUnite.php`);
   }
 
   ListeCommandant(): Observable<Commandant[]>
   {
-    return this.http.get<Commandant[]>(`${environment.URL_PHP}listing/ListeCommandant.php`);
+    return this.http.get<Commandant[]>(`${environment.URL_PHP}listing/listeCommandant.php`);
   }
 
   ListeJoueurUnite(): Observable<JoueurUnite[]>
@@ -31,5 +31,15 @@ export class UniteService {
   AjouterUniteJoueur(info: FormData): Observable<boolean>
   {
     return this.http.post<boolean>(`${environment.URL_PHP}Ajouter/AjouterUniteJoueur.php`, info);
+  }
+
+  AjouterUnite(info: JSON): Observable<boolean>
+  {
+    return this.http.post<boolean>(`${environment.URL_PHP}Ajouter/AjouterUnite.php`, info);
+  }
+
+  SuppUniteJoueur(info: JoueurUnite): Observable<boolean>
+  {
+    return this.http.post<boolean>(`${environment.URL_PHP}Supprimer/suppUniteJoueur.php`, info);
   }
 }

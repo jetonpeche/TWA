@@ -59,6 +59,23 @@ export class ListeJoueurUniteComponent implements OnInit, AfterViewInit {
   {
     // ouvre le modal avec la liste des unites du joueur
     const liste = this.listeJoueurUnite.filter(a => a.id == joueur.id);
-    const dialogRef = this.dialog.open(ModalListeJoueurUniteComponent, {data: { liste: liste, joueur: joueur }});
+    const dialogRef = this.dialog.open(ModalListeJoueurUniteComponent, { disableClose: true,  data: { liste: liste, joueur: joueur }});
+
+    // supprime les unites supprimé de la liste des unite du joueur
+    dialogRef.beforeClosed().subscribe(
+      () => 
+      {
+        // recupere la liste des unite supprimer
+        const liste = dialogRef.componentInstance.listeUniteSupp;
+
+        for (const element of liste)
+        {
+          const index = this.listeJoueurUnite.findIndex(a => a.id == element.id && a.idNation == element.idNation && a.idCommandant == element.idCommandant && a.idUnite == element.idUnite);
+          
+          this.listeJoueurUnite.splice(index, 1);
+        }
+      }
+    )
+    
   }
 }

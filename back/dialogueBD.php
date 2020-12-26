@@ -66,6 +66,17 @@ class DialogueBD
         return $liste;
     }
 
+    public function RecupererIdUniteAjouter($nomUnite)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "SELECT idUnite FROM unite WHERE libelUnite = ?";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($nomUnite));
+
+        $unite = $sth->fetchObject();
+        return $unite->idUnite;
+    }
+
     public function AjouterUniteJoueur($idUnite, $idCmdt, $nivUnite, $idJoueur, $unitePreferer)
     {
         if(!$this->AdejaUnite($idUnite, $idCmdt, $nivUnite, $idJoueur))
@@ -86,6 +97,45 @@ class DialogueBD
             $sth = $conn->prepare($sql);
             $sth->execute(array($speudo));
         }
+    }
+
+    public function AjouterUnite($nomUnite)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "INSERT INTO unite (libelUnite) VALUES (?)";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($nomUnite));
+    }
+
+    public function AjouterUniteNation($idUnite, $idNation)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "INSERT INTO unite_nation (idUnite, idNation) VALUES (?, ?)";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($idUnite, $idNation));
+    }
+
+    public function SuppUniteJoueur($idJoueur, $idUnite, $idCommandant)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "DELETE FROM joueur_unite WHERE id = ? AND idUnite = ? AND idCommandant = ?";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($idJoueur, $idUnite, $idCommandant));
+    }
+
+    public function UniteExist($nomUnite)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "SELECT COUNT(*) as nombre FROM unite WHERE libelUnite = ?";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($nomUnite));
+
+        $ok = $sth->fetchObject();
+        
+        if($ok->nombre == 1)
+            return true;
+        else
+            return false;
     }
 
     private function JoueurExist($speudo)

@@ -1,0 +1,19 @@
+<form class="container-fluid" #e="ngForm" (ngSubmit)=AjouterUnite(e)>
+
+    <h2>Ajouter unité</h2>
+    
+    <!-- nom unite -->
+    <mat-form-field class="example-full-width">
+        <mat-label>Nom de la nouvelle unité</mat-label>
+        <input name="nomUnite" matInput ngModel required>
+    </mat-form-field>
+
+    <!-- liste des nations -->
+    <mat-selection-list name="nationChoisi" ngModel required>
+        <mat-list-option *ngFor="let ligne of listeNation" [value]="ligne.idNation">
+          {{ ligne.libelNation }}
+        </mat-list-option>
+    </mat-selection-list>
+
+    <button mat-raised-button type="submit" [disabled]="e.invalid" color="primary">Ajouter</button>
+</form>
