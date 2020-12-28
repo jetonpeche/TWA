@@ -12,10 +12,14 @@ export class UniteService {
 
   constructor(private http: HttpClient) { }
 
-
   ListerUnite(): Observable<Unite[]>
   {
     return this.http.get<Unite[]>(`${environment.URL_PHP}listing/listeUnite.php`);
+  }
+
+  ListerUniteNation(): Observable<Unite[]>
+  {
+    return this.http.get<Unite[]>(`${environment.URL_PHP}listing/listeUniteNation.php`);
   }
 
   ListeCommandant(): Observable<Commandant[]>

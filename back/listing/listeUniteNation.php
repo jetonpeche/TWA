@@ -4,5 +4,5 @@
 
     $diag = new DialogueBD();
 
-    echo json_encode($diag->ListerUnite());
+    echo json_encode($diag->ListerUniteNation());
 ?>

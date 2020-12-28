@@ -3,6 +3,17 @@ require_once 'connexion.php';
 
 class DialogueBD
 {   
+    public function ListerUnite()
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "SELECT * FROM unite ORDER BY libelUnite";
+        $sth = $conn->prepare($sql);
+        $sth->execute();
+
+        $liste = $sth->fetchAll();
+        return $liste;
+    }
+
     public function ListerUniteNation()
     {
         $conn = Connexion::getConnexion();
@@ -77,6 +88,17 @@ class DialogueBD
         return $unite->idUnite;
     }
 
+    public function RecupererIdNationAjouter($nomNation)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "SELECT idNation FROM nation WHERE libelNation = ?";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($nomNation));
+
+        $unite = $sth->fetchObject();
+        return $unite->idNation;
+    }
+
     public function AjouterUniteJoueur($idUnite, $idCmdt, $nivUnite, $idJoueur, $unitePreferer)
     {
         if(!$this->AdejaUnite($idUnite, $idCmdt, $nivUnite, $idJoueur))
@@ -107,12 +129,28 @@ class DialogueBD
         $sth->execute(array($nomUnite));
     }
 
+    public function AjouterNation($nomNation)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "INSERT INTO nation (libelNation) VALUES (?)";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($nomNation));
+    }
+
     public function AjouterUniteNation($idUnite, $idNation)
     {
         $conn = Connexion::getConnexion();
         $sql = "INSERT INTO unite_nation (idUnite, idNation) VALUES (?, ?)";
         $sth = $conn->prepare($sql);
         $sth->execute(array($idUnite, $idNation));
+    }
+
+    public function AjouterCommandant($nomCmdt, $idNation)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "INSERT INTO commandant (libelCommandant, idNation) VALUES (?, ?)";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($nomCmdt, $idNation));
     }
 
     public function SuppUniteJoueur($idJoueur, $idUnite, $idCommandant)
@@ -129,6 +167,21 @@ class DialogueBD
         $sql = "SELECT COUNT(*) as nombre FROM unite WHERE libelUnite = ?";
         $sth = $conn->prepare($sql);
         $sth->execute(array($nomUnite));
+
+        $ok = $sth->fetchObject();
+        
+        if($ok->nombre == 1)
+            return true;
+        else
+            return false;
+    }
+
+    public function NationExist($nomNation)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "SELECT COUNT(*) as nombre FROM nation WHERE libelNation = ?";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($nomNation));
 
         $ok = $sth->fetchObject();
         

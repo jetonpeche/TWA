@@ -15,4 +15,9 @@ export class NationService {
   {
     return this.http.get<Nation[]>(`${environment.URL_PHP}listing/listeNation.php`);
   }
+
+  AjouterNation(info: JSON): Observable<boolean>
+  {
+    return this.http.post<boolean>(`${environment.URL_PHP}Ajouter/AjouterNation.php`, info);
+  }
 }
