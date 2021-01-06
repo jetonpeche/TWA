@@ -35,6 +35,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { UniteService } from './services/unite.service';
 import { JoueurService } from './services/joueur.service';
 import { NationService } from './services/nation.service';
+import { AjoutCommandantComponent } from './components/ajout-commandant/ajout-commandant.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { NationService } from './services/nation.service';
     ListeJoueurUniteComponent,
     ModalListeJoueurUniteComponent,
     AjoutUniteComponent,
-    AjoutNationComponent
+    AjoutNationComponent,
+    AjoutCommandantComponent
   ],
   imports: [
     HttpClientModule,

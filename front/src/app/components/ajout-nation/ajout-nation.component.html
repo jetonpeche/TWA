@@ -2,17 +2,25 @@
 
     <h2>Ajouter nouvelle nation</h2>
     
-    <!-- nom unite -->
-    <mat-form-field class="example-full-width">
-        <mat-label>Nom de la nouvelle nation</mat-label>
-        <input name="nomNation" pattern="[A-Za-zÀ-ÿ]+$" matInput ngModel required>
-    </mat-form-field>
+    <div class="row">
 
-    <!-- nb commandant a ajouter -->
-    <mat-form-field class="example-full-width">
-        <mat-label>Nombre de commandant</mat-label>
-        <input type="number" min="1" name="nbCmdt" (keyup)="AjouterInput($event.target.value)" matInput ngModel required>
-    </mat-form-field>
+        <!-- nom unite -->
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Nom de la nouvelle nation</mat-label>
+                <input name="nomNation" pattern="[A-Za-zÀ-ÿ]+$" matInput ngModel required>
+            </mat-form-field>
+        </div>
+
+        <!-- nb commandant a ajouter -->
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Nombre de commandant</mat-label>
+                <input type="number" min="1" name="nbCmdt" (keyup)="AjouterInput($event.target.value)" matInput ngModel required>
+            </mat-form-field>
+        </div>
+    </div>
+    
 
     <!-- liste commandant -->
     <div class="row">

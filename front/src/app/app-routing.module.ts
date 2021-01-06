@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AjoutCommandantComponent } from './components/ajout-commandant/ajout-commandant.component';
 import { AjoutNationComponent } from './components/ajout-nation/ajout-nation.component';
 import { AjoutUniteComponent } from './components/ajout-unite/ajout-unite.component';
 import { JoueurComponent } from './components/joueur/joueur.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'Ajouter-unite-Joueur', component: UniteComponent },
   { path: 'joueur-unite', component: ListeJoueurUniteComponent },
   { path: 'Ajouter-unite', component: AjoutUniteComponent },
-  { path: 'Ajouter-nation', component: AjoutNationComponent }
+  { path: 'Ajouter-nation', component: AjoutNationComponent },
+  { path: 'Ajouter-commandant', component: AjoutCommandantComponent }
 ];
 
 @NgModule({

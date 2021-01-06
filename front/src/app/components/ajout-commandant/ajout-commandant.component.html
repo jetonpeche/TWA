@@ -1,0 +1,31 @@
+<form class="container-fluid" #e="ngForm" (ngSubmit)="AjouterCmdt(e)">
+
+    <h2>Ajouter nouveau commandant</h2>
+
+    <!-- nombre de commandant -->
+    <mat-form-field>
+        <mat-label>Nombre de commandant</mat-label>
+        <input type="number" min="1" name="nbCmdt" (keyup)="AjouterInput($event.target.value)" matInput ngModel required>
+    </mat-form-field>
+
+    <!-- liste commandant -->
+    <div class="row">
+        <div class="col-md-6 col-xs-12" *ngFor="let ligne of listeInput; let index = index">
+            <mat-form-field class="inputCmdt">
+                <mat-label>commandant {{ index + 1 }}</mat-label>
+                <input [name]="ligne.name" matInput ngModel required>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <h3>Choix de la nation</h3>
+
+    <!-- liste des nations -->
+    <mat-selection-list name="nationChoisi" [multiple]="false" ngModel required>
+        <mat-list-option *ngFor="let ligne of listeNation" [value]="ligne.idNation">
+            {{ ligne.libelNation }}
+        </mat-list-option>
+    </mat-selection-list>
+
+    <button mat-raised-button type="submit" [disabled]="e.invalid" color="primary">Ajouter</button>
+</form>

@@ -42,6 +42,11 @@ export class UniteService {
     return this.http.post<boolean>(`${environment.URL_PHP}Ajouter/AjouterUnite.php`, info);
   }
 
+  AjouterCommandant(info: JSON): Observable<boolean>
+  {
+    return this.http.post<boolean>(`${environment.URL_PHP}Ajouter/AjouterCommandant.php`, info);
+  }
+
   SuppUniteJoueur(info: JoueurUnite): Observable<boolean>
   {
     return this.http.post<boolean>(`${environment.URL_PHP}Supprimer/suppUniteJoueur.php`, info);
