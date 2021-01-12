@@ -161,6 +161,22 @@ class DialogueBD
         $sth->execute(array($idJoueur, $idUnite, $idCommandant));
     }
 
+    public function SuppTouteUniteJoueur($idJoueur)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "DELETE FROM joueur_unite WHERE id = ?";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($idJoueur));
+    }
+
+    public function SuppJoueur($idJoueur)
+    {
+        $conn = Connexion::getConnexion();
+        $sql = "DELETE FROM joueur WHERE id = ?";
+        $sth = $conn->prepare($sql);
+        $sth->execute(array($idJoueur));
+    }
+
     public function UniteExist($nomUnite)
     {
         $conn = Connexion::getConnexion();

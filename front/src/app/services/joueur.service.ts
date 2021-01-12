@@ -21,4 +21,9 @@ export class JoueurService
   {
     return this.http.post<any>(`${environment.URL_PHP}Ajouter/AjouterJoueur.php`, info);
   }
+
+  SupprimerJoueur(info: JSON): Observable<any>
+  {
+    return this.http.post<any>(`${environment.URL_PHP}Supprimer/SuppJoueur.php`, info);
+  }
 }

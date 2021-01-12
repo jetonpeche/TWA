@@ -23,7 +23,17 @@
                 <mat-icon>library_books</mat-icon>
             </button>
         </td>
-      </ng-container>
+    </ng-container>
+
+    <!-- supprimer Column -->
+    <ng-container matColumnDef="supprimer">
+      <th mat-header-cell *matHeaderCellDef> Supprimer joueur </th>
+      <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab color="warn" (click)="SupprimerJoueur(element.id)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+      </td>
+  </ng-container>
       
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
